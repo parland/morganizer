@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import java.util.List;
+import java.io.File;
 
 /**
  * A class to hold details of audio files.
@@ -35,7 +36,6 @@ public class MusicOrganizer
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
 
-
             if (input.matches("\\d+$")) { // testa om input består av en eller flera siffror
                 int index = Integer.parseInt(input);
                 if (index > 0 && index <= this. files.size()){
@@ -51,6 +51,10 @@ public class MusicOrganizer
                     case "stop": 
                     case "s":
                     this.stopPlaying();
+                    break;
+                    case "list": 
+                    case "l":
+                    this.listAllFiles();
                     break;
                     default:
                     System.out.println("Did you really wrote \"" + input + "\"!?");
@@ -191,15 +195,31 @@ public class MusicOrganizer
         return null;
     }
 
-    static public ArrayList<String> getMP3filesFromDir(){
+    public ArrayList<String> getMP3filesFromDir(){
         String folderPath = getFolderPath();
-        List<String> st = new java.util.Vector<String>();
-        //        List<String> strings = (ArrayList<String>) java.util.Arrays.asList(new java.io.File(folderPath).list());
-        String[] strings = new java.io.File(folderPath).list();
         ArrayList<String> mp3Files = new ArrayList<String>();
-        for (String s : strings) {
-            if (s.endsWith("mp3")){
-                mp3Files.add(folderPath + System.getProperty("file.separator") + s);
+        mp3Files.addAll( addFiles( folderPath ) );
+        return mp3Files;
+    }
+
+    private ArrayList<String> addFiles(String dir){
+        // System.out.println("addFiles from: " + dir);
+        ArrayList<String> mp3Files = new ArrayList<String>();
+        String[] strings = new java.io.File(dir).list();
+        if (strings != null && strings.length > 0){
+            // loop through strings
+            for (String fileOrDir : strings){
+                String workingOn = dir + System.getProperty("file.separator") +fileOrDir;
+                // if .mp3 - add to newArrayList
+                if (workingOn.toLowerCase().endsWith(".mp3")){
+                    mp3Files.add(workingOn);
+                    // System.out.println("added: " + workingOn);
+                }
+                // if directory - newArrayList = addFiles from new dir;
+                if (new File(workingOn).isDirectory()){
+                    // System.out.println("inspecting: " + workingOn);
+                    mp3Files.addAll(addFiles(workingOn));
+                }
             }
         }
         return mp3Files;
