@@ -24,6 +24,7 @@ public class MusicOrganizer
     // A player for the music files.
     private MusicPlayer player;
     private String userName;
+    
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
         mo.tracks = new ArrayList<Track>();
@@ -36,7 +37,6 @@ public class MusicOrganizer
         }
         mo.listAllFiles();
         mo.startMusicOrganizer();
-
     }
 
     /**
@@ -276,9 +276,7 @@ public class MusicOrganizer
 
     /**
      * Seach files (aka 4.26)
-     * 
      */
-
     public void listMatching (String str){
         boolean noHit = true;
         for(String s : files){
@@ -404,23 +402,18 @@ public class MusicOrganizer
         }
     }
 
-
     public void loadLibrary (String libraryFileName){
         TextIO.readFile(libraryFileName);
         while(TextIO.peek() != TextIO.EOF) {
             this.files.add(TextIO.getln());
         }
-
         TextIO.readStandardInput();
     }
-
-    
-    
+   
     private String getCleanFileName(String s){
         int indexOfTheLastSlash = s.lastIndexOf(System.getProperty("file.separator"));
         return s.substring(indexOfTheLastSlash+1);
     }
-
 
 }
 
