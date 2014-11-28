@@ -1,0 +1,6 @@
+*.class
+*.mp3
+javazoom/.DS_Store
+.DS_Store
+audio/.DS_Store
+*/.DS_Store
