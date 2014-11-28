@@ -9,8 +9,13 @@ objectbench.height=76
 objectbench.width=749
 package.editor.height=384
 package.editor.width=647
+<<<<<<< Updated upstream
 package.editor.x=47
 package.editor.y=115
+=======
+package.editor.x=511
+package.editor.y=302
+>>>>>>> Stashed changes
 package.numDependencies=2
 package.numTargets=3
 package.showExtends=true

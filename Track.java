@@ -7,6 +7,35 @@
  */
 public class Track
 {
-    private String year;
-   
+    private String artist;
+    private String title;
+    private String filename;   
+
+    private int playCount;
+
+    public Track (String filePath){
+        filename = filePath;
+    }
+
+    public void setDetails(String artist, String title, String filename)
+    {   
+        setDetails("unknown","unknown",filename);
+        playCount = 0;
+    }
+
+    public void resetCount(){
+        playCount = 0;
+    }
+
+    public void incrementCount(){
+        playCount++;
+    }
+
+    public String getFileName() {
+        return filename;
+    }
+    
+    public int getPlayCount(){
+        return playCount;
+    }
 }
