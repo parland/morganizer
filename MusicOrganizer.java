@@ -5,7 +5,7 @@ import java.io.File;
 import org.jaudiotagger.audio.*;
 import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
-import org.jaudiotagger.tag.id3.*;
+import org.jaudiotagger.tag.id3.*; 
 
 /**
  * A class to hold details of audio files.
