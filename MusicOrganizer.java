@@ -5,7 +5,9 @@ import java.io.File;
 import org.jaudiotagger.audio.*;
 import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
-import org.jaudiotagger.tag.id3.*; 
+import org.jaudiotagger.tag.id3.*;
+import java.util.Random;
+
 
 /**
  * A class to hold details of audio files.
@@ -40,11 +42,15 @@ public class MusicOrganizer
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
             String trace = "";
-
+            if (input.contains(" ")) {
+                trace = input.substring(input.indexOf(" ")+1);
+                input = input.substring(0, input.indexOf(" "));
+            }
+            int trackIndex = 0;
             if (input.matches("\\d+$")) { // testa om input består av en eller flera siffror
-                int index = Integer.parseInt(input);
-                if (index > 0 && index <= this. files.size()){
-                    this.startPlaying(index-1);
+                trackIndex = Integer.parseInt(input);
+                if (trackIndex > 0 && trackIndex <= this. files.size()){
+                    this.startPlaying(trackIndex-1);
                 }
             } else {
                 switch (input){
@@ -53,29 +59,101 @@ public class MusicOrganizer
                     System.out.println("Auf Wiedersehen!");
                     System.exit(0);
                     break;
+
+                    case "play": 
+                    case "p":
+                    if(trace == null) {
+                        System.out.println("USAGE: play [trackIndex]");
+                        break;
+                    }
+                    try {
+                        trackIndex = Integer.parseInt(trace);
+                    } catch (NumberFormatException e){
+                        System.out.println("USAGE: play [trackIndex] as an integer");
+                        break;
+                    }
+                    this.mp3FileInfo(trackIndex);
+                    this.startPlaying(trackIndex-1);
+                    break;
+
                     case "stop": 
                     case "s":
                     this.stopPlaying();
                     break;
+
                     case "list": 
                     case "l":
                     this.listAllFiles();
                     break;
 
+                    case "help":
+                    case "?":
+                    this.listAllCommands();
+                    break;
+
+                    case "rand":
+                    case "r":
+                    this.playRandom();
+                    break;
+
+                    case "find":
+                    case "f":
+                    this.listMatching(trace);
+                    break;
+
+                    case "save":
+                    String fileName = null;
+                    if(trace == null) {
+                        System.out.println("and file name is: ");
+                        fileName = TextIO.getln();
+                    } else {
+                        fileName = trace;
+                    }
+                    this.saveMusicLibrary(fileName);
+                    break;
+
+                    case "load":
+                    this.loadLibrary("lib.txt"); //correct file name
+                    break;
+
+                    case "info":
+                    if(trace == null) {
+                        System.out.println("USAGE: info [trackIndex]");
+                        break;
+                    }
+                    try {
+                        trackIndex = Integer.parseInt(trace);
+                    } catch (NumberFormatException e){
+                        System.out.println("USAGE: info [trackIndex] as an integer");
+                        break;
+                    }
+                    this.mp3FileInfo(trackIndex);
+                    break;
+
                     case "edit":
+                    if(trace == null) {
+                        System.out.println("USAGE: edit [trackIndex]");
+                        break;
+                    }
+                    try {
+                        trackIndex = Integer.parseInt(trace);
+                    } catch (NumberFormatException e){
+                        System.out.println("USAGE: edit [trackIndex] as an integer");
+                        break;
+                    }
                     System.out.println("What would you like to edit? Genre or year?");
                     String what = TextIO.getln();
                     switch(what) {
                         case "year":
                         System.out.println("What year?");
                         String year = TextIO.getln();
-                        this.editFile(Integer.parseInt(trace), year, "");
+                        this.editFile(trackIndex, year, "");
                         break;
 
                         case "genre":
                         System.out.println("What genre?");
                         String genre = TextIO.getln();
-                        this.editFile(Integer.parseInt(trace), "", genre);
+                        this.editFile(trackIndex, "", genre);
                         break;
                     }
                     break;
@@ -88,15 +166,7 @@ public class MusicOrganizer
         }
     }
 
-    /**
-     * Test method
-     */
-    static public void test(){
-        MusicOrganizer mo = new MusicOrganizer();
-        loadFiles (mo);
-        mo.listAllFiles();
-    }
-
+    @Deprecated 
     static public void loadFiles (MusicOrganizer mo){
         mo.addFile("audio/BigBillBroonzy-BabyPleaseDontGo1.mp3");
         mo.addFile("audio/BlindBlake-EarlyMorningBlues.mp3");
@@ -262,9 +332,71 @@ public class MusicOrganizer
                 tag.setField(FieldKey.GENRE, type);
             }
             AudioFileIO.write(f);
+        } catch (Exception e) {
         }
-        catch (Exception e) {
+    }
+
+    public void mp3FileInfo (int index) {
+        String filePath = files.get(index-1);
+        try {
+            MP3File f = (MP3File)AudioFileIO.read(new java.io.File(filePath));
+            MP3AudioHeader audioHeader = f.getMP3AudioHeader();
+            System.out.println("Length: " + audioHeader.getTrackLength() + " sec");
+
+            // does not work for now
+            //             AbstractID3v2Tag v2Tag = f.getID3v2Tag();
+            //             System.out.println("Artist: " + v2Tag.getFirst(ID3v24Frames.FRAME_ID_ARTIST));
+            //             System.out.println("Album: " + v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM));
+            //             System.out.println("Year: " + v2Tag.getFirst(ID3v24Frames.FRAME_ID_YEAR));
+
+            Tag tag = f.getTag();
+            System.out.println("Genre: " + tag.getFirst(FieldKey.GENRE));
+            System.out.println("Artist: " + tag.getFirst(FieldKey.ARTIST));
+            System.out.println("Album: " + tag.getFirst(FieldKey.ALBUM));
+            System.out.println("Year: " + tag.getFirst(FieldKey.YEAR));
+
+        } catch (Exception e) {
         }
+    }
+
+    public void listAllCommands() {
+        System.out.println("exit OR q FOR quit");
+        System.out.println("list OR l FOR list of all tracks");
+        System.out.println("stop OR s FOR stop playing");
+        System.out.println("rand OR r FOR random track");
+        System.out.println("find OR f AND [seachString] FOR track seach ");
+        System.out.println("save AND [fileName] TO save play list");
+        System.out.println("edit AND [trackIndex] FOR edit mp3 tags");
+        System.out.println("info AND [trackIndex] FOR track information");
+        System.out.println("help OR ? FOR this list");
+    }
+
+    /**
+     * Play random track
+     */
+    public void playRandom()
+    {   
+        Random r = new Random();
+        startPlaying(r.nextInt(files.size()));
+    }
+
+    public void saveMusicLibrary(String fileName) {
+        // String fileName = "lib.txt";
+
+        TextIO.writeFile(fileName);
+        for(String file : files) {
+            TextIO.putln(file);
+        }
+    }
+
+    public void loadLibrary (String libraryFileName){
+        TextIO.readFile(libraryFileName);
+        while(TextIO.peek() != TextIO.EOF) {
+            this.files.add(TextIO.getln());
+        }
+
+        TextIO.readStandardInput();
     }
 }
 
+	
