@@ -6,8 +6,8 @@ import java.util.List;
  * A class to hold details of audio files.
  * This version can play the files.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Andrej
+ * @version 2014.11.27
  */
 public class MusicOrganizer
 {
