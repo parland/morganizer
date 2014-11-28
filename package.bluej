@@ -9,8 +9,18 @@ objectbench.height=76
 objectbench.width=749
 package.editor.height=384
 package.editor.width=647
+<<<<<<< HEAD
 package.editor.x=336
 package.editor.y=116
+=======
+<<<<<<< Updated upstream
+package.editor.x=47
+package.editor.y=115
+=======
+package.editor.x=511
+package.editor.y=302
+>>>>>>> Stashed changes
+>>>>>>> origin/play-count
 package.numDependencies=2
 package.numTargets=4
 package.showExtends=true

@@ -20,13 +20,20 @@ public class MusicOrganizer
 {
     // An ArrayList for storing the file names of music files.
     private ArrayList<String> files;
+    private ArrayList<Track> tracks;
     // A player for the music files.
     private MusicPlayer player;
-
+    private String userName;
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
-
+        mo.tracks = new ArrayList<Track>();
         mo.files = mo.getMP3filesFromDir();
+        if (mo.tracks == null) System.out. println("mo.tracks är null");
+        for ( String fileName : mo.files){
+            System.out. println(fileName);
+            Track t = new Track(fileName); 
+            mo.tracks.add(t);
+        }
         mo.listAllFiles();
         mo.startMusicOrganizer();
 
@@ -38,7 +45,7 @@ public class MusicOrganizer
     public void startMusicOrganizer(){
 
         while(true) {
-            // din kod här
+            
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
             String trace = "";
@@ -229,11 +236,18 @@ public class MusicOrganizer
      * Use stopPlaying() to stop it playing.
      * @param index The index of the file to be played.
      */
+
     public void startPlaying(int index)
     {
         String filename = files.get(index);
         stopPlaying();
         player.startPlaying(filename);
+        for (Track tr : tracks){
+            if (tr.getFileName().equals(filename)){
+                tr.incrementCount();
+            }
+        }
+        System.out.println("Now Playing " + this .getCleanFileName(files.get(index)));
     }
 
     /**
@@ -251,11 +265,12 @@ public class MusicOrganizer
     {
         int position = 0;
         for(int i = 0; i < files.size(); i++){
-            String fileName = files.get(i);
-            int indexOfTheLastSlash = fileName.lastIndexOf("/");
-            position = files.indexOf(fileName);
-            System.out.println((position+1) + ": " + fileName.substring(indexOfTheLastSlash+1));
-            //             position++;
+            //             String fileName = files.get(i);
+            Track tr = tracks.get(i);
+            //position = files.indexOf(fileName);
+            System.out.println((position+1) + ": " +" play count = "+ tr.getPlayCount() 
+                + " >>> " + this. getCleanFileName(tr.getFileName()));
+            position++;
         }
     }
 
@@ -389,6 +404,7 @@ public class MusicOrganizer
         }
     }
 
+
     public void loadLibrary (String libraryFileName){
         TextIO.readFile(libraryFileName);
         while(TextIO.peek() != TextIO.EOF) {
@@ -397,6 +413,15 @@ public class MusicOrganizer
 
         TextIO.readStandardInput();
     }
+
+    
+    
+    private String getCleanFileName(String s){
+        int indexOfTheLastSlash = s.lastIndexOf(System.getProperty("file.separator"));
+        return s.substring(indexOfTheLastSlash+1);
+    }
+
+
 }
 
 	
