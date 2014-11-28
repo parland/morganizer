@@ -1,5 +1,3 @@
 *.class
 *.mp3
-javazoom/.DS_Store
-.DS_Store
-javazoom/.DS_Store
+*.DS_Store
