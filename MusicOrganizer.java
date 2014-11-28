@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import java.util.List;
 import java.io.File;
+import org.jaudiotagger.audio.*;
+import org.jaudiotagger.audio.mp3.*;
+import org.jaudiotagger.tag.*;
+import org.jaudiotagger.tag.id3.*;
 
 /**
  * A class to hold details of audio files.
@@ -35,6 +39,7 @@ public class MusicOrganizer
             // din kod här
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
+            String trace = "";
 
             if (input.matches("\\d+$")) { // testa om input består av en eller flera siffror
                 int index = Integer.parseInt(input);
@@ -56,6 +61,25 @@ public class MusicOrganizer
                     case "l":
                     this.listAllFiles();
                     break;
+
+                    case "edit":
+                    System.out.println("What would you like to edit? Genre or year?");
+                    String what = TextIO.getln();
+                    switch(what) {
+                        case "year":
+                        System.out.println("What year?");
+                        String year = TextIO.getln();
+                        this.editFile(Integer.parseInt(trace), year, "");
+                        break;
+
+                        case "genre":
+                        System.out.println("What genre?");
+                        String genre = TextIO.getln();
+                        this.editFile(Integer.parseInt(trace), "", genre);
+                        break;
+                    }
+                    break;
+
                     default:
                     System.out.println("Did you really wrote \"" + input + "\"!?");
 
@@ -223,6 +247,24 @@ public class MusicOrganizer
             }
         }
         return mp3Files;
+    }
+
+    public void editFile  (int index, String year, String type) {
+        String filePath = files.get(index-1);
+        try {
+            AudioFile f = AudioFileIO.read(new java.io.File(filePath));
+            Tag tag = f.getTag();
+
+            if (year.length() > 0) {
+                tag.setField(FieldKey.YEAR, year);
+            }
+            else if (type.length() > 0) {
+                tag.setField(FieldKey.GENRE, type);
+            }
+            AudioFileIO.write(f);
+        }
+        catch (Exception e) {
+        }
     }
 }
 
