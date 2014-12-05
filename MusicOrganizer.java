@@ -60,7 +60,8 @@ public class MusicOrganizer
                     this.startPlaying(trackIndex-1);
                 }
             } else {
-                switch (input){
+
+                switch (input){  
                     case "exit": 
                     case "q":
                     System.out.println("Auf Wiedersehen!");
@@ -74,6 +75,9 @@ public class MusicOrganizer
                         break;
                     }
                     try {
+                        if(trace.startsWith("fav")){
+                            // play my favorite track
+                        }
                         trackIndex = Integer.parseInt(trace);
                     } catch (NumberFormatException e){
                         System.out.println("USAGE: play [trackIndex] as an integer");

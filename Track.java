@@ -1,4 +1,4 @@
-
+import java.util.Date;
 /**
  * Write a description of class Track here.
  * 
@@ -12,6 +12,7 @@ public class Track
     private String filename;   
 
     private int playCount;
+    private Date lastTimePlayed;
 
     public Track (String filePath){
         filename = filePath;
