@@ -7,6 +7,7 @@ import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
+//import nothing
 
 /**
  * A class to hold details of audio files.
@@ -37,7 +38,7 @@ public class MusicOrganizer
         mo.listAllFiles();
         mo.startMusicOrganizer();
     }
-
+public void function(String x) {}
     /**
      * Start point for player
      */
@@ -263,7 +264,7 @@ public class MusicOrganizer
     }
 
     /**
-     * Seach files (aka 4.26)
+     * Search files (aka 4.26)
      */
     public void listMatching (String str){
         boolean noHit = true;
