@@ -47,7 +47,7 @@ public class MusicOrganizer
 
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
-            String trace = "";
+            String trace = null;
             if (input.contains(" ")) {
                 trace = input.substring(input.indexOf(" ")+1);
                 input = input.substring(0, input.indexOf(" "));
@@ -97,14 +97,7 @@ public class MusicOrganizer
                     break;
 
                     case "save":
-                    String fileName = null;
-                    if(trace == null) {
-                        System.out.println("and file name is: ");
-                        fileName = TextIO.getln();
-                    } else {
-                        fileName = trace;
-                    }
-                    this.saveMusicLibrary(fileName);
+                    this.saveTrack(trace);
                     break;
 
                     case "load":
@@ -382,8 +375,23 @@ public class MusicOrganizer
     {   
         Random r = new Random();
         startPlaying(r.nextInt(files.size()));
+    }  
+   
+    private void saveTrack(String trace){
+        String fileName = null;
+        if(trace == null){
+            System.out.println("and filename is: ");
+            fileName = TextIO.getln();
+            
+        }
+        else {
+            fileName = trace;
+        }
+      if(fileName != ""){
+            this.saveMusicLibrary(fileName);
+            }
+        
     }
-
     private void playTrack(String trace){
         int trackIndex = 0;
         if(trace == null) {

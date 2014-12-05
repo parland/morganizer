@@ -8,10 +8,11 @@ dependency2.type=UsesDependency
 dependency3.from=MusicOrganizer
 dependency3.to=Track
 dependency3.type=UsesDependency
-objectbench.height=76
+objectbench.height=77
 objectbench.width=749
-package.editor.height=384
+package.editor.height=383
 package.editor.width=647
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -31,6 +32,11 @@ package.editor.x=8
 package.editor.y=23
 >>>>>>> update-edit
 package.numDependencies=3
+=======
+package.editor.x=139
+package.editor.y=87
+package.numDependencies=3
+>>>>>>> update-save
 package.numTargets=4
 package.showExtends=true
 package.showUses=true
@@ -52,6 +58,7 @@ target1.typeParameters=
 target1.width=130
 target1.x=310
 target1.y=210
+<<<<<<< HEAD
 <<<<<<< HEAD
 target2.editor.height=896
 target2.editor.width=1288
@@ -80,6 +87,8 @@ target3.width=80
 target3.x=380
 target3.y=60
 =======
+=======
+>>>>>>> update-save
 target2.editor.height=700
 target2.editor.width=900
 target2.editor.x=328
@@ -91,6 +100,7 @@ target2.showInterface=false
 target2.type=ClassTarget
 target2.typeParameters=
 target2.width=80
+<<<<<<< HEAD
 <<<<<<< HEAD
 target2.x=380
 target2.y=60
@@ -128,19 +138,19 @@ target2.type=ClassTarget
 target2.typeParameters=
 >>>>>>> Stashed changes
 target2.width=80
+=======
+>>>>>>> update-save
 target2.x=380
 target2.y=60
 target3.editor.height=744
-<<<<<<< Updated upstream
-target3.editor.width=937
-target3.editor.x=101
-target3.editor.y=34
-=======
 target3.editor.width=1220
 target3.editor.x=121
 target3.editor.y=184
+<<<<<<< HEAD
 >>>>>>> Stashed changes
 >>>>>>> FETCH_HEAD
+=======
+>>>>>>> update-save
 target3.height=60
 target3.name=MusicOrganizer
 target3.naviview.expanded=true
@@ -154,6 +164,7 @@ target3.y=110
 target4.editor.height=700
 target4.editor.width=900
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 <<<<<<< HEAD
@@ -164,15 +175,21 @@ target4.height=50
 target4.name=Track
 target4.naviview.expanded=false
 =======
+=======
+>>>>>>> update-save
 target4.editor.x=0
 target4.editor.y=22
 target4.height=50
 target4.name=Track
 target4.naviview.expanded=true
->>>>>>> Stashed changes
 target4.showInterface=false
 target4.type=ClassTarget
 target4.typeParameters=
 target4.width=80
+<<<<<<< HEAD
 target4.x=70
 target4.y=10
+=======
+target4.x=80
+target4.y=30
+>>>>>>> update-save
