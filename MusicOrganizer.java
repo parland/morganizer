@@ -8,7 +8,6 @@ import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
 
-
 /**
  * A class to hold details of audio files.
  * This version can play the files.
@@ -62,18 +61,7 @@ public class MusicOrganizer
 
                     case "play": 
                     case "p":
-                    if(trace == null) {
-                        System.out.println("USAGE: play [trackIndex]");
-                        break;
-                    }
-                    try {
-                        trackIndex = Integer.parseInt(trace);
-                    } catch (NumberFormatException e){
-                        System.out.println("USAGE: play [trackIndex] as an integer");
-                        break;
-                    }
-                    this.mp3FileInfo(trackIndex);
-                    this.startPlaying(trackIndex-1);
+                    this.playTrack(trace);
                     break;
 
                     case "stop": 
@@ -378,6 +366,23 @@ public class MusicOrganizer
     {   
         Random r = new Random();
         startPlaying(r.nextInt(files.size()));
+    }
+
+    private void playTrack(String trace){
+        int trackIndex = 0;
+        if(trace == null) {
+            System.out.println("USAGE: play [trackIndex]");
+            return;
+        }
+        try {
+            trackIndex = Integer.parseInt(trace);
+            this.mp3FileInfo(trackIndex);
+            this.startPlaying(trackIndex-1);
+
+        } catch (NumberFormatException e){
+            System.out.println("USAGE: play [trackIndex] as an integer");
+
+        }
     }
 
     public void saveMusicLibrary(String fileName) {
