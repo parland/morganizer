@@ -343,8 +343,9 @@ public class MusicOrganizer
     }
 
     public void mp3FileInfo (int index) {
-        String filePath = files.get(index-1);
+        
         Track tr = tracks.get(index-1);
+        String filePath = tr.getFileName();
         try {
             MP3File f = (MP3File)AudioFileIO.read(new java.io.File(filePath));
             MP3AudioHeader audioHeader = f.getMP3AudioHeader();
@@ -361,7 +362,7 @@ public class MusicOrganizer
             System.out.println("Artist: " + tag.getFirst(FieldKey.ARTIST));
             System.out.println("Album: " + tag.getFirst(FieldKey.ALBUM));
             System.out.println("Year: " + tag.getFirst(FieldKey.YEAR));
-            System.out.println("Last played: " + tr.getLastTimePlayed());         
+            System.out.println("Last played: " + tr.getLastTimePlayedAsString());         
         } catch (Exception e) {
             System.out.println(e);
         }

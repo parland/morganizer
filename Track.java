@@ -47,4 +47,9 @@ public class Track
     public Date getLastTimePlayed(){
         return lastTimePlayed;
     }
+    
+    public String getLastTimePlayedAsString(){
+        if (lastTimePlayed == null) return "Never";        
+        else return lastTimePlayed.toString();
+    }
 }
