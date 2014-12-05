@@ -7,6 +7,11 @@ import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
 
 /**
  * A class to hold details of audio files.
@@ -24,6 +29,9 @@ public class MusicOrganizer
     private MusicPlayer player;
     private String userName;
     
+    private static int cnt;
+    private Track currentlyPlaying;
+
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
         mo.tracks = new ArrayList<Track>();
@@ -226,9 +234,49 @@ public class MusicOrganizer
         for (Track tr : tracks){
             if (tr.getFileName().equals(filename)){
                 tr.incrementCount();
+                this.currentlyPlaying = tr;
             }
         }
         System.out.println("Now Playing " + this .getCleanFileName(files.get(index)));
+        //Get track length
+        try{
+            String filePath = files.get(index);
+            MP3File f = (MP3File)AudioFileIO.read(new java.io.File(filePath));
+            MP3AudioHeader audioHeader = f.getMP3AudioHeader();
+            currentlyPlaying.length = audioHeader.getTrackLength();
+            System.out.println(currentlyPlaying.length);
+        } catch (Exception e) {
+             System.out.println(e);
+        }
+        //Start a counter to match the length of the track
+        new JFrame().setVisible(true);
+        
+        ActionListener actListner = new ActionListener()
+        {
+
+               @Override
+
+               public void actionPerformed(ActionEvent event) {
+
+                  cnt += 1;
+
+                  System.out.println(cnt);
+                  
+                  if (cnt == currentlyPlaying.length){
+                      stopPlaying();
+                      String filename = files.get(index+1);
+                      player.startPlaying(filename);
+                      cnt = 0;
+                      
+                    }
+
+               } 
+        };
+
+        Timer timer = new Timer(1000, actListner);
+
+        timer.start();
+        
     }
 
     /**

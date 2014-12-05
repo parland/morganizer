@@ -12,6 +12,7 @@ public class Track
     private String filename;   
 
     private int playCount;
+    public int length;
 
     public Track (String filePath){
         filename = filePath;
