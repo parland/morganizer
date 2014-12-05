@@ -1,14 +1,2 @@
 #BlueJ class context
-comment0.params=filePath
-comment0.target=Track(java.lang.String)
-comment1.params=artist\ title\ filename
-comment1.target=void\ setDetails(java.lang.String,\ java.lang.String,\ java.lang.String)
-comment2.params=
-comment2.target=void\ resetCount()
-comment3.params=
-comment3.target=void\ incrementCount()
-comment4.params=
-comment4.target=java.lang.String\ getFileName()
-comment5.params=
-comment5.target=int\ getPlayCount()
-numComments=6
+numComments=0
