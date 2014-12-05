@@ -313,16 +313,15 @@ public class MusicOrganizer
                     System.out.println("What year?");
                     String year = TextIO.getln();
                     tag.setField(FieldKey.YEAR, year);
-                    this.editFile(trackIndex, year, "");
                     break;
 
                     case "genre":
                     System.out.println("What genre?");
                     String genre = TextIO.getln();
                     tag.setField(FieldKey.GENRE, genre);
-                    this.editFile(trackIndex, genre, "");
                     break;
                 }
+                AudioFileIO.write(f);
             } catch (NumberFormatException e){
                 System.out.println("USAGE: edit [trackIndex] as an integer");
             }
