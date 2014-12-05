@@ -12,8 +12,13 @@ objectbench.height=76
 objectbench.width=749
 package.editor.height=384
 package.editor.width=647
+<<<<<<< HEAD
 package.editor.x=43
 package.editor.y=247
+=======
+package.editor.x=8
+package.editor.y=23
+>>>>>>> update-edit
 package.numDependencies=3
 package.numTargets=4
 package.showExtends=true
@@ -36,6 +41,7 @@ target1.typeParameters=
 target1.width=130
 target1.x=310
 target1.y=210
+<<<<<<< HEAD
 target2.editor.height=896
 target2.editor.width=1288
 target2.editor.x=70
@@ -62,6 +68,34 @@ target3.typeParameters=
 target3.width=80
 target3.x=380
 target3.y=60
+=======
+target2.editor.height=700
+target2.editor.width=900
+target2.editor.x=328
+target2.editor.y=33
+target2.height=50
+target2.name=TextIO
+target2.naviview.expanded=false
+target2.showInterface=false
+target2.type=ClassTarget
+target2.typeParameters=
+target2.width=80
+target2.x=380
+target2.y=60
+target3.editor.height=970
+target3.editor.width=937
+target3.editor.x=509
+target3.editor.y=22
+target3.height=60
+target3.name=MusicOrganizer
+target3.naviview.expanded=true
+target3.showInterface=false
+target3.type=ClassTarget
+target3.typeParameters=
+target3.width=120
+target3.x=150
+target3.y=110
+>>>>>>> update-edit
 target4.editor.height=700
 target4.editor.width=900
 target4.editor.x=380

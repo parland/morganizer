@@ -23,7 +23,7 @@ public class MusicOrganizer
     // A player for the music files.
     private MusicPlayer player;
     private String userName;
-    
+
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
         mo.tracks = new ArrayList<Track>();
@@ -44,7 +44,7 @@ public class MusicOrganizer
     public void startMusicOrganizer(){
 
         while(true) {
-            
+
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
             String trace = "";
@@ -126,31 +126,7 @@ public class MusicOrganizer
                     break;
 
                     case "edit":
-                    if(trace == null) {
-                        System.out.println("USAGE: edit [trackIndex]");
-                        break;
-                    }
-                    try {
-                        trackIndex = Integer.parseInt(trace);
-                    } catch (NumberFormatException e){
-                        System.out.println("USAGE: edit [trackIndex] as an integer");
-                        break;
-                    }
-                    System.out.println("What would you like to edit? Genre or year?");
-                    String what = TextIO.getln();
-                    switch(what) {
-                        case "year":
-                        System.out.println("What year?");
-                        String year = TextIO.getln();
-                        this.editFile(trackIndex, year, "");
-                        break;
-
-                        case "genre":
-                        System.out.println("What genre?");
-                        String genre = TextIO.getln();
-                        this.editFile(trackIndex, "", genre);
-                        break;
-                    }
+                    this.editFile(trace);
                     break;
 
                     default:
@@ -320,20 +296,47 @@ public class MusicOrganizer
         return mp3Files;
     }
 
-    public void editFile  (int index, String year, String type) {
-        String filePath = files.get(index-1);
-        try {
-            AudioFile f = AudioFileIO.read(new java.io.File(filePath));
-            Tag tag = f.getTag();
+    private void editFile  (String index) {
+        if (index == null) {
+            System.out.println("USAGE: edit [trackIndex]");
+        }
+        else {
+            try {
+                int trackIndex = Integer.parseInt(index);
+                String filePath = files.get(trackIndex-1);
+                AudioFile f = AudioFileIO.read(new java.io.File(filePath));
+                Tag tag = f.getTag();
+                System.out.println("What would you like to edit? Genre or year?");
+                String what = TextIO.getln();
+                switch(what) {
+                    case "year":
+                    System.out.println("What year?");
+                    String year = TextIO.getln();
+                    tag.setField(FieldKey.YEAR, year);
+                    break;
 
-            if (year.length() > 0) {
-                tag.setField(FieldKey.YEAR, year);
+                    case "genre":
+                    System.out.println("What genre?");
+                    String genre = TextIO.getln();
+                    tag.setField(FieldKey.GENRE, genre);
+                    break;
+                }
+                AudioFileIO.write(f);
+            } catch (NumberFormatException e){
+                System.out.println("USAGE: edit [trackIndex] as an integer");
             }
-            else if (type.length() > 0) {
-                tag.setField(FieldKey.GENRE, type);
+            catch (org.jaudiotagger.audio.exceptions.CannotReadException e){
+                System.out.println(e);
             }
-            AudioFileIO.write(f);
-        } catch (Exception e) {
+            catch (java.io.IOException e){
+                System.out.println(e);
+            }
+            catch (org.jaudiotagger.tag.TagException e){
+                System.out.println(e);
+            }
+            catch (Exception e){
+                System.out.println(e);
+            }
         }
     }
 
@@ -399,7 +402,7 @@ public class MusicOrganizer
     }
 
     public void saveMusicLibrary(String fileName) {
-        // String fileName = "lib.txt";
+        if(fileName==null || fileName=="") fileName = "lib.txt";
 
         TextIO.writeFile(fileName);
         for(String file : files) {
@@ -414,7 +417,7 @@ public class MusicOrganizer
         }
         TextIO.readStandardInput();
     }
-   
+
     private String getCleanFileName(String s){
         int indexOfTheLastSlash = s.lastIndexOf(System.getProperty("file.separator"));
         return s.substring(indexOfTheLastSlash+1);
