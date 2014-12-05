@@ -154,11 +154,9 @@ public class MusicOrganizer
                         case "year":
                         System.out.println("What year?");
                         String year = TextIO.getln();
-<<<<<<< HEAD
-                        this.editFile(Integer.parseInt(trace), year, "");  // fix trace
-=======
+
                         this.editFile(trackIndex, year, "");
->>>>>>> master
+
                         break;
 
                         case "genre":
@@ -275,11 +273,6 @@ public class MusicOrganizer
             //position = files.indexOf(fileName);
             System.out.println((position+1) + ": " +" play count = "+ tr.getPlayCount() 
                 + " >>> " + this. getCleanFileName(tr.getFileName()));
-<<<<<<< HEAD
-            //System.out.println((position+1) + ": " + fileName);
-            //             position++;
-=======
->>>>>>> master
             position++;
         }
     }
@@ -383,8 +376,7 @@ public class MusicOrganizer
         } catch (Exception e) {
         }
     }
-<<<<<<< HEAD
-=======
+
 
     public void listAllCommands() {
         System.out.println("exit OR q FOR quit");
@@ -425,8 +417,6 @@ public class MusicOrganizer
 
         TextIO.readStandardInput();
     }
-
->>>>>>> master
     
     
     private String getCleanFileName(String s){
@@ -434,10 +424,7 @@ public class MusicOrganizer
         return s.substring(indexOfTheLastSlash+1);
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 }
 
 	
