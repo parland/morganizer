@@ -9,7 +9,7 @@ comment10.target=void\ listAllFiles()
 comment10.text=\n\ Lists\ all\ files\ in\ the\ music\ library.\n
 comment11.params=str
 comment11.target=void\ listMatching(java.lang.String)
-comment11.text=\n\ Seach\ files\ (aka\ 4.26)\n\ \n
+comment11.text=\n\ Seach\ files\ (aka\ 4.26)\n
 comment12.params=
 comment12.target=java.lang.String\ getFolderPath()
 comment13.params=
@@ -33,16 +33,8 @@ comment20.params=fileName
 comment20.target=void\ saveMusicLibrary(java.lang.String)
 comment21.params=libraryFileName
 comment21.target=void\ loadLibrary(java.lang.String)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 comment22.params=s
 comment22.target=java.lang.String\ getCleanFileName(java.lang.String)
->>>>>>> update-edit
-=======
-comment22.params=s
-comment22.target=java.lang.String\ getCleanFileName(java.lang.String)
->>>>>>> FETCH_HEAD
 comment3.params=
 comment3.target=MusicOrganizer()
 comment3.text=\n\ Create\ a\ MusicOrganizer\n

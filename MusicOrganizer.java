@@ -7,6 +7,7 @@ import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
+import java.util.Date;
 
 /**
  * A class to hold details of audio files.
@@ -209,6 +210,7 @@ public class MusicOrganizer
         for (Track tr : tracks){
             if (tr.getFileName().equals(filename)){
                 tr.incrementCount();
+                tr.setDatePlayed();
             }
         }
         System.out.println("Now Playing " + this .getCleanFileName(files.get(index)));
@@ -342,6 +344,7 @@ public class MusicOrganizer
 
     public void mp3FileInfo (int index) {
         String filePath = files.get(index-1);
+        Track tr = tracks.get(index-1);
         try {
             MP3File f = (MP3File)AudioFileIO.read(new java.io.File(filePath));
             MP3AudioHeader audioHeader = f.getMP3AudioHeader();
@@ -358,8 +361,9 @@ public class MusicOrganizer
             System.out.println("Artist: " + tag.getFirst(FieldKey.ARTIST));
             System.out.println("Album: " + tag.getFirst(FieldKey.ALBUM));
             System.out.println("Year: " + tag.getFirst(FieldKey.YEAR));
-
+            System.out.println("Last played: " + tr.getLastTimePlayed());         
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

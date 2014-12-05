@@ -13,6 +13,7 @@ objectbench.width=749
 package.editor.height=384
 package.editor.width=647
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
 package.editor.x=43
@@ -31,6 +32,11 @@ package.editor.x=8
 package.editor.y=23
 >>>>>>> update-edit
 package.numDependencies=3
+=======
+package.editor.x=945
+package.editor.y=253
+package.numDependencies=3
+>>>>>>> Stashed changes
 package.numTargets=4
 package.showExtends=true
 package.showUses=true
@@ -52,6 +58,7 @@ target1.typeParameters=
 target1.width=130
 target1.x=310
 target1.y=210
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target2.editor.height=896
 target2.editor.width=1288
@@ -80,6 +87,8 @@ target3.width=80
 target3.x=380
 target3.y=60
 =======
+=======
+>>>>>>> Stashed changes
 target2.editor.height=700
 target2.editor.width=900
 target2.editor.x=328
@@ -91,6 +100,7 @@ target2.showInterface=false
 target2.type=ClassTarget
 target2.typeParameters=
 target2.width=80
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target2.x=380
 target2.y=60
@@ -101,17 +111,21 @@ target3.editor.y=22
 =======
 target2.x=70
 target2.y=10
+=======
+target2.x=380
+target2.y=60
+>>>>>>> Stashed changes
 target3.editor.height=744
-target3.editor.width=1280
-target3.editor.x=64
-target3.editor.y=22
+target3.editor.width=937
+target3.editor.x=145
+target3.editor.y=204
 target3.height=60
 target3.name=MusicOrganizer
 target3.naviview.expanded=true
->>>>>>> genre-year
 target3.showInterface=false
 target3.type=ClassTarget
 target3.typeParameters=
+<<<<<<< Updated upstream
 target3.width=130
 =======
 <<<<<<< Updated upstream
@@ -147,17 +161,22 @@ target3.naviview.expanded=true
 target3.showInterface=false
 target3.type=ClassTarget
 target3.typeParameters=
+=======
+>>>>>>> Stashed changes
 target3.width=120
 target3.x=150
 target3.y=110
 >>>>>>> update-edit
 target4.editor.height=700
 target4.editor.width=900
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 >>>>>>> FETCH_HEAD
+=======
+>>>>>>> Stashed changes
 target4.editor.x=380
 target4.editor.y=66
 target4.height=50
