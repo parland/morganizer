@@ -402,7 +402,7 @@ public class MusicOrganizer
     }
 
     public void saveMusicLibrary(String fileName) {
-        // String fileName = "lib.txt";
+        if(fileName==null || fileName=="") fileName = "lib.txt";
 
         TextIO.writeFile(fileName);
         for(String file : files) {
