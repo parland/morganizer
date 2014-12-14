@@ -7,6 +7,8 @@ import org.jaudiotagger.audio.mp3.*;
 import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
+import java.util.Collections;
+import java.util.Comparator;
 //import nothing
 //import more nothing
 
@@ -25,7 +27,7 @@ public class MusicOrganizer
     // A player for the music files.
     private MusicPlayer player;
     private String userName;
-    
+
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
         mo.tracks = new ArrayList<Track>();
@@ -46,7 +48,7 @@ public class MusicOrganizer
     public void startMusicOrganizer(){
 
         while(true) {
-            
+
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
             String trace = "";
@@ -100,7 +102,7 @@ public class MusicOrganizer
 
                     case "save":
                     String fileName = null;
-                    if(trace == null) {
+                    if (trace == null) {
                         System.out.println("and file name is: ");
                         fileName = TextIO.getln();
                     } else {
@@ -109,8 +111,16 @@ public class MusicOrganizer
                     this.saveMusicLibrary(fileName);
                     break;
 
+                    case "sort":
+                    if (trace != null) {
+                        sort(trace);
+                    }
+
                     case "load":
-                    this.loadLibrary("lib.txt"); //correct file name
+                    if (trace != null) {
+                        this.loadLibrary("lib.txt"); //correct file name
+                    }   
+
                     break;
 
                     case "info":
@@ -204,8 +214,9 @@ public class MusicOrganizer
      */
     public void listFile(int index)
     {
-        if(index >= 0 && index < files.size()) {
+        if (index >= 0 && index < files.size()) {
             String filename = files.get(index);
+            // String filename = tracks.get(index).filename;
             System.out.println(filename);
         }
     }
@@ -217,6 +228,7 @@ public class MusicOrganizer
     public void removeFile(int index)
     {
         if(index >= 0 && index < files.size()) {
+            //tracks.remove(index);
             files.remove(index);
         }
     }
@@ -238,6 +250,50 @@ public class MusicOrganizer
             }
         }
         System.out.println("Now Playing " + this .getCleanFileName(files.get(index)));
+    }
+
+    public void sort(String what) {
+
+        switch (what) {
+            case "album":                                    
+
+            Collections.sort(tracks, new Comparator<Track>() {
+                    public int compare(Track a, Track b) {
+                        return a.album.compareTo(b.album);
+                    }
+                });
+            for (int j = 0; j < tracks.size(); j++) {
+                System.out.println(tracks.get(j).album);
+            }
+            break;
+
+            case "title":
+            Collections.sort(tracks, new Comparator<Track>() {
+                    public int compare(Track a, Track b) {
+                        return a.title.compareTo(b.title);
+                    }
+                });
+
+            for (Track track: tracks) {
+                System.out.println(track.title);
+            }
+            break;
+
+            case "year":
+            Collections.sort(tracks, new Comparator<Track>() {
+                    public int compare(Track a, Track b) {
+                        return a.year - b.year;
+                    }
+                });
+
+            for (Track song: tracks) {
+                System.out.println(" (" + song.year +") "+ song.title);
+            }
+            break;
+            default:
+            System.out.println("You gave an incorrect sotring aoiajoi");
+
+        }
     }
 
     /**
@@ -416,7 +472,7 @@ public class MusicOrganizer
         }
         TextIO.readStandardInput();
     }
-   
+
     private String getCleanFileName(String s){
         int indexOfTheLastSlash = s.lastIndexOf(System.getProperty("file.separator"));
         return s.substring(indexOfTheLastSlash+1);
