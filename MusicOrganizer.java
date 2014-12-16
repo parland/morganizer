@@ -27,14 +27,7 @@ public class MusicOrganizer
     
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
-        mo.tracks = new ArrayList<Track>();
-        mo.files = mo.getMP3filesFromDir();
-        if (mo.tracks == null) System.out. println("mo.tracks är null");
-        for ( String fileName : mo.files){
-            System.out. println(fileName);
-            Track t = new Track(fileName); 
-            mo.tracks.add(t);
-        }
+
         mo.listAllFiles();
         mo.startMusicOrganizer();
     }
@@ -190,8 +183,18 @@ public class MusicOrganizer
      */
     public MusicOrganizer()
     {
-        files = new ArrayList<String>();
-        player = new MusicPlayer();
+        System.out.println("MusicOrganizer()");
+        this.files = new ArrayList<String>();
+        this.player = new MusicPlayer();
+        this.tracks = new ArrayList<Track>();
+        this.files = this.getMP3filesFromDir(); // TODO move to separate button
+        if (this.tracks == null) System.out. println("tracks är null");
+        for ( String fileName : this.files){
+            System.out. println(fileName);
+            Track t = new Track(fileName); 
+            this.tracks.add(t);
+        }
+        this.listAllFiles();
     }
 
     /**
@@ -299,6 +302,7 @@ public class MusicOrganizer
     static public String getFolderPath(){
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        System.out.println("getFolderPath()");
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             return chooser.getSelectedFile().toString();
@@ -307,7 +311,9 @@ public class MusicOrganizer
     }
 
     public ArrayList<String> getMP3filesFromDir(){
-        String folderPath = getFolderPath();
+        System.out.println("getMP3filesFromDir()");
+        // String folderPath = getFolderPath();
+        String folderPath = "/Users/andrej/Kroke";
         ArrayList<String> mp3Files = new ArrayList<String>();
         mp3Files.addAll( addFiles( folderPath ) );
         return mp3Files;
