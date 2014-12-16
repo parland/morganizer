@@ -30,7 +30,10 @@ public class MusicOrganizer
     private String userName;
     
     private static int cnt;
+    private static boolean override=false;
     private Track currentlyPlaying;
+
+    private static MusicOrganizer morg;
 
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
@@ -177,6 +180,7 @@ public class MusicOrganizer
     {
         files = new ArrayList<String>();
         player = new MusicPlayer();
+        morg = this;
     }
 
     /**
@@ -228,6 +232,7 @@ public class MusicOrganizer
 
     public void startPlaying(int index)
     {
+        indexCurPlaying = index;
         String filename = files.get(index);
         stopPlaying();
         player.startPlaying(filename);
@@ -251,34 +256,40 @@ public class MusicOrganizer
         //Start a counter to match the length of the track
         new JFrame().setVisible(true);
         
-        ActionListener actListner = new ActionListener()
+        
+        
+        
+        
+           
+
+           timer.start();
+        
+    }
+    int indexCurPlaying; 
+    
+    ActionListener actListner = new ActionListener()
         {
 
                @Override
 
                public void actionPerformed(ActionEvent event) {
-
+                 //     System.out.println("Source: " + event.getSource().getClass());
                   cnt += 1;
 
                   System.out.println(cnt);
                   
                   if (cnt == currentlyPlaying.length){
                       stopPlaying();
-                      String filename = files.get(index+1);
-                      player.startPlaying(filename);
+                      MusicOrganizer.morg.timer.stop();
                       cnt = 0;
-                      
+                      String filename = files.get(indexCurPlaying+1);
+                      //MusicOrganizer.morg.startPlaying(indexCurPlaying+1);
+                      startPlaying(indexCurPlaying+1);
                     }
 
                } 
         };
-
-        Timer timer = new Timer(1000, actListner);
-
-        timer.start();
-        
-    }
-
+    private Timer timer = new Timer(100, actListner);
     /**
      * Stop the player.
      */
