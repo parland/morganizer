@@ -27,14 +27,7 @@ public class MusicOrganizer
     
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
-        mo.tracks = new ArrayList<Track>();
-        mo.files = mo.getMP3filesFromDir();
-        if (mo.tracks == null) System.out. println("mo.tracks är null");
-        for ( String fileName : mo.files){
-            System.out. println(fileName);
-            Track t = new Track(fileName); 
-            mo.tracks.add(t);
-        }
+
         mo.listAllFiles();
         mo.startMusicOrganizer();
     }
@@ -190,8 +183,16 @@ public class MusicOrganizer
      */
     public MusicOrganizer()
     {
-        files = new ArrayList<String>();
-        player = new MusicPlayer();
+        this.files = new ArrayList<String>();
+        this.player = new MusicPlayer();
+        this.tracks = new ArrayList<Track>();
+        this.files = this.getMP3filesFromDir(); // TODO move to separate button
+        if (this.tracks == null) System.out. println("tracks är null");
+        for ( String fileName : this.files){
+            System.out. println(fileName);
+            Track t = new Track(fileName); 
+            this.tracks.add(t);
+        }
     }
 
     /**
