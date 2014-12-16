@@ -8,7 +8,6 @@ import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.id3.*;
 import java.util.Random;
 
-
 /**
  * A class to hold details of audio files.
  * This version can play the files.
@@ -24,7 +23,7 @@ public class MusicOrganizer
     // A player for the music files.
     private MusicPlayer player;
     private String userName;
-    
+
     static public void main (String [] abc){
         MusicOrganizer mo = new MusicOrganizer();
 
@@ -38,7 +37,7 @@ public class MusicOrganizer
     public void startMusicOrganizer(){
 
         while(true) {
-            
+
             System.out. print("Wich track to play? Enter a number: ");
             String input = TextIO.getln();
             String trace = "";
@@ -187,14 +186,7 @@ public class MusicOrganizer
         this.files = new ArrayList<String>();
         this.player = new MusicPlayer();
         this.tracks = new ArrayList<Track>();
-        this.files = this.getMP3filesFromDir(); // TODO move to separate button
-        if (this.tracks == null) System.out. println("tracks är null");
-        for ( String fileName : this.files){
-            System.out. println(fileName);
-            Track t = new Track(fileName); 
-            this.tracks.add(t);
-        }
-        this.listAllFiles();
+        //        this.addMP3filesFromDirWithDialog();
     }
 
     /**
@@ -310,7 +302,7 @@ public class MusicOrganizer
         return null;
     }
 
-    public ArrayList<String> getMP3filesFromDir(){
+    private ArrayList<String> getMP3filesFromDir(){
         System.out.println("getMP3filesFromDir()");
         // String folderPath = getFolderPath();
         String folderPath = "/Users/andrej/Kroke";
@@ -319,7 +311,25 @@ public class MusicOrganizer
         return mp3Files;
     }
 
-    private ArrayList<String> addFiles(String dir){
+    public void addMP3filesFromDir(String dirPath){
+        this.files.addAll(this.addFiles(dirPath)); 
+        addToTrackArray(this.files);
+    }
+
+    public void addMP3filesFromDirWithDialog(){
+        this.files = getMP3filesFromDir();
+        addToTrackArray(this.files);
+    }
+
+    private void addToTrackArray(ArrayList<String> mp3Files){   
+       for (String fileName : this.files){
+            System.out.println(fileName);
+            Track t = new Track(fileName); 
+            this.tracks.add(t);
+        }        
+    }
+
+     private ArrayList<String> addFiles(String dir){
         // System.out.println("addFiles from: " + dir);
         ArrayList<String> mp3Files = new ArrayList<String>();
         String[] strings = new java.io.File(dir).list();
@@ -340,7 +350,7 @@ public class MusicOrganizer
             }
         }
         return mp3Files;
-    }
+     }
 
     public void editFile  (int index, String year, String type) {
         String filePath = files.get(index-1);
@@ -359,7 +369,7 @@ public class MusicOrganizer
         }
     }
 
-    public void mp3FileInfo (int index) {
+    private void mp3FileInfo (int index) {
         String filePath = files.get(index-1);
         try {
             MP3File f = (MP3File)AudioFileIO.read(new java.io.File(filePath));
@@ -419,7 +429,7 @@ public class MusicOrganizer
         }
         TextIO.readStandardInput();
     }
-   
+
     private String getCleanFileName(String s){
         int indexOfTheLastSlash = s.lastIndexOf(System.getProperty("file.separator"));
         return s.substring(indexOfTheLastSlash+1);
