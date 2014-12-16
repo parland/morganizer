@@ -183,6 +183,7 @@ public class MusicOrganizer
      */
     public MusicOrganizer()
     {
+        System.out.println("MusicOrganizer()");
         this.files = new ArrayList<String>();
         this.player = new MusicPlayer();
         this.tracks = new ArrayList<Track>();
@@ -193,6 +194,7 @@ public class MusicOrganizer
             Track t = new Track(fileName); 
             this.tracks.add(t);
         }
+        this.listAllFiles();
     }
 
     /**
@@ -300,6 +302,7 @@ public class MusicOrganizer
     static public String getFolderPath(){
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        System.out.println("getFolderPath()");
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             return chooser.getSelectedFile().toString();
@@ -308,7 +311,9 @@ public class MusicOrganizer
     }
 
     public ArrayList<String> getMP3filesFromDir(){
-        String folderPath = getFolderPath();
+        System.out.println("getMP3filesFromDir()");
+        // String folderPath = getFolderPath();
+        String folderPath = "/Users/andrej/Kroke";
         ArrayList<String> mp3Files = new ArrayList<String>();
         mp3Files.addAll( addFiles( folderPath ) );
         return mp3Files;

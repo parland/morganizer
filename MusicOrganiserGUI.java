@@ -7,10 +7,11 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class MusicOrganiserGUI extends Application {
-
+    MusicOrganizer mo = new MusicOrganizer();
+    
     @Override
     public void start(Stage primaryStage) {
-        MusicOrganizer mo = new MusicOrganizer();
+        
         Button btn = new Button();
         btn.setText("play music");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -18,7 +19,7 @@ public class MusicOrganiserGUI extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                     System.out.println("Hello World!");
-                    
+                    mo.playRandom();
                 }
             });
 
@@ -30,6 +31,8 @@ public class MusicOrganiserGUI extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println("PS: " + primaryStage);
+        System.out.println("MO: " + mo);
     }
 
     public static void main(String[] args) {
