@@ -66,7 +66,19 @@ public class MusicOrganiserGUI extends Application {
                     mo.startPlaying(index);
                 }
             });
-        grid.add(playBtn, 0, 3, 2, 1);  
+        grid.add(playBtn, 0, 3);
+        
+        Button stopBtn = new Button();
+        stopBtn.setText("stop music");
+        stopBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("play music");
+                    mo.stopPlaying();
+                }
+            });
+        grid.add(stopBtn, 1, 3);
+        
         //        Scene scene = new Scene(grid, 300, 275);
         Button addMusicBtn = new Button();
         addMusicBtn.setText("add music");
