@@ -38,21 +38,20 @@ public class MusicOrganiserGUI extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text scenetitle = new Text("Collector");
+        Text scenetitle = new Text("Music Collector");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 1, 0);
 
-        Label userName = new Label("User Name:");
+        Label userName = new Label("Track number:");
         grid.add(userName, 0, 1);
 
         TextField userTextField = new TextField();
         grid.add(userTextField, 1, 1);
 
-        Label pw = new Label("Password:");
-        grid.add(pw, 0, 2);
-
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+//         Label pw = new Label("Password:");
+//         grid.add(pw, 0, 2);
+//         PasswordField pwBox = new PasswordField();
+//         grid.add(pwBox, 1, 2);
 
         Button playBtn = new Button();
         playBtn.setText("play music");
@@ -74,17 +73,17 @@ public class MusicOrganiserGUI extends Application {
                     System.out.println("add music");
                     DirectoryChooser dirChooser = new DirectoryChooser();
                     dirChooser.setTitle("Open Music Directory");
-                    
+
                     File selectedDir = dirChooser.showDialog(primaryStage);
                     mo.addMP3filesFromDir(selectedDir.toString());
                 }
             });
         grid.add(addMusicBtn, 0, 0);
-        
-        TableView<Track> table = new TableView<Track>();
-        ObservableList<Track> tracks = mo.getTeamMembers();
- table.setItems(tracks);
- 
+
+//         TableView<Track> table = new TableView<Track>();
+//         ObservableList<Track> tracks = mo.getTeamMembers();
+//         table.setItems(tracks);
+
         primaryStage.setTitle("Music Organizer");
         primaryStage.show();
     }
