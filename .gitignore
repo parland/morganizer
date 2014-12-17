@@ -2,3 +2,9 @@
 *.mp3
 *.DS_Store
 
+
+doc/.DS_Store
+
+MusicOrganizerGUI.java
+
+MusicOrganizerGUI.ctxt
