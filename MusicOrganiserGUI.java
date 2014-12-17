@@ -19,9 +19,6 @@ import javafx.stage.DirectoryChooser;
 import java.io.File;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 public class MusicOrganiserGUI extends Application {
     MusicOrganizer mo = new MusicOrganizer();
@@ -51,10 +48,10 @@ public class MusicOrganiserGUI extends Application {
         TextField userTextField = new TextField();
         grid.add(userTextField, 1, 1);
 
-        //         Label pw = new Label("Password:");
-        //         grid.add(pw, 0, 2);
-        //         PasswordField pwBox = new PasswordField();
-        //         grid.add(pwBox, 1, 2);
+//         Label pw = new Label("Password:");
+//         grid.add(pw, 0, 2);
+//         PasswordField pwBox = new PasswordField();
+//         grid.add(pwBox, 1, 2);
 
         Button playBtn = new Button();
         playBtn.setText("play music");
@@ -94,18 +91,9 @@ public class MusicOrganiserGUI extends Application {
             });
         grid.add(addMusicBtn, 0, 0);
 
-        TableView<Track> table = new TableView<Track>();
-        grid.add(table, 0, 4, 2, 1);
-        table.setEditable(true);
-        TableColumn libNumberCol = new TableColumn("Number");
-        TableColumn playCountCol = new TableColumn("Play count");
-        TableColumn artistCol = new TableColumn("Artist");
-        TableColumn trackNameCol = new TableColumn("Track");
-        TableColumn lengthCol = new TableColumn("Length");
-
-        table.getColumns().addAll(libNumberCol, playCountCol,lengthCol, artistCol, trackNameCol);
-        //         ObservableList<Track> tracks = mo.getTeamMembers();
-        //         table.setItems(tracks);
+//         TableView<Track> table = new TableView<Track>();
+//         ObservableList<Track> tracks = mo.getTeamMembers();
+//         table.setItems(tracks);
 
         primaryStage.setTitle("Music Organizer");
         primaryStage.show();
